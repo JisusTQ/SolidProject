@@ -2,21 +2,65 @@
 package com.mycompany.solidproject;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class AddProductForm extends javax.swing.JFrame {
 
     private Main mainFrame;
     private List<Product> products;
-    
+    private int lastProductId;
+       
+    public void setLastProductId(int productId) {
+     lblIdValue.setText(productId+1+"");
+     this.lastProductId = productId;
+}
 
     public AddProductForm(List<Product> products, Main main) {
         initComponents();
+        initObjects();
         this.products = products;
         this.mainFrame = main;
     }
     public AddProductForm() {
         initComponents();
+        initObjects();
     }
+    
+    private boolean isValidData(){
+        boolean isValidData = true;
+        if (txtName.getText().isBlank()){
+            lblNameError.setVisible(true);
+            isValidData = false;
+        }
+        else{
+            lblNameError.setVisible(false);
+        }
+        try {
+            if(txtPrice.getText().isBlank() || Float.parseFloat(txtPrice.getText())<0){
+              throw new Exception();
+            }
+            else{
+            lblPriceError.setVisible(false);
+        }
+        } catch (Exception e) {
+            lblPriceError.setVisible(true);
+            isValidData = false;
+        }
+        try {
+            if(txtStock.getText().isBlank() || Integer.parseInt(txtStock.getText())<0){
+              throw new Exception();
+            }
+            else{
+            lblStockError.setVisible(false);
+        }
+        } catch (Exception e) {
+            lblStockError.setVisible(true);
+            isValidData = false;
+        }
+        return isValidData;
+    }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -34,6 +78,9 @@ public class AddProductForm extends javax.swing.JFrame {
         txtStock = new javax.swing.JTextField();
         btnConfirmProduct = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        lblNameError = new javax.swing.JLabel();
+        lblPriceError = new javax.swing.JLabel();
+        lblStockError = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -47,6 +94,9 @@ public class AddProductForm extends javax.swing.JFrame {
 
         lblName.setText("Name");
 
+        txtName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtName.setMaximumSize(new java.awt.Dimension(168, 16));
+        txtName.setMinimumSize(new java.awt.Dimension(168, 16));
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -55,6 +105,8 @@ public class AddProductForm extends javax.swing.JFrame {
 
         lblPrice.setText("Price");
 
+        txtPrice.setMaximumSize(new java.awt.Dimension(168, 16));
+        txtPrice.setMinimumSize(new java.awt.Dimension(168, 16));
         txtPrice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPriceActionPerformed(evt);
@@ -62,6 +114,9 @@ public class AddProductForm extends javax.swing.JFrame {
         });
 
         lblStock.setText("Stock");
+
+        txtStock.setMaximumSize(new java.awt.Dimension(168, 16));
+        txtStock.setMinimumSize(new java.awt.Dimension(168, 16));
 
         btnConfirmProduct.setText("Save Product");
         btnConfirmProduct.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +131,18 @@ public class AddProductForm extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
+
+        lblNameError.setForeground(new java.awt.Color(204, 0, 0));
+        lblNameError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNameError.setText("Product name must be required");
+
+        lblPriceError.setForeground(new java.awt.Color(204, 0, 0));
+        lblPriceError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPriceError.setText("Price must be a valid value");
+
+        lblStockError.setForeground(new java.awt.Color(204, 0, 0));
+        lblStockError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStockError.setText("Stock must be a valid value");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,21 +159,22 @@ public class AddProductForm extends javax.swing.JFrame {
                         .addGap(170, 170, 170)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblStock)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblPrice)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblId)
                                 .addGap(204, 204, 204)
-                                .addComponent(lblIdValue))))
+                                .addComponent(lblIdValue))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblName)
+                                    .addComponent(lblPrice)
+                                    .addComponent(lblStock))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNameError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblPriceError, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(lblStockError, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(233, 233, 233)
                         .addComponent(btnConfirmProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -127,15 +195,21 @@ public class AddProductForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNameError)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrice)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPriceError)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblStock)
                     .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblStockError)
+                .addGap(38, 38, 38)
                 .addComponent(btnConfirmProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -145,15 +219,21 @@ public class AddProductForm extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         this.setVisible(false);
+        initObjects();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnConfirmProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmProductActionPerformed
+        if(!isValidData()){
+            JOptionPane.showMessageDialog(null, "You have some errors in form");
+            return;
+        }
         Product product = new Product();
-        product.setId(1);
+        product.setId(lastProductId+1);
         product.setName(txtName.getText());
         product.setPrice(Float.parseFloat(txtPrice.getText()));
         product.setStock(Integer.parseInt(txtStock.getText()));
         products.add(product);
+        initObjects();
         mainFrame.initObjects();
         this.setVisible(false);
     }//GEN-LAST:event_btnConfirmProductActionPerformed
@@ -198,6 +278,15 @@ public class AddProductForm extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void initObjects(){
+        txtName.setText("");
+        txtPrice.setText("");
+        txtStock.setText("");
+        lblNameError.setVisible(false);
+        lblPriceError.setVisible(false);
+        lblStockError.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -206,8 +295,11 @@ public class AddProductForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdValue;
     private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblNameError;
     private javax.swing.JLabel lblPrice;
+    private javax.swing.JLabel lblPriceError;
     private javax.swing.JLabel lblStock;
+    private javax.swing.JLabel lblStockError;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;

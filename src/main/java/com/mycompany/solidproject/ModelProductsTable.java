@@ -25,7 +25,8 @@ public class ModelProductsTable extends AbstractTableModel {
         this.fireTableDataChanged();
     }
     
-    public void removeProduct(){
+    public void removeProduct(int row){
+        this.products.remove(row);
         this.fireTableDataChanged();
     }
     
@@ -65,5 +66,5 @@ public class ModelProductsTable extends AbstractTableModel {
     public String getColumnName(int column) {
         return this.columnNames[column];
     }
-     
+
 }

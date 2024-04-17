@@ -2,6 +2,7 @@ package com.mycompany.solidproject;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
@@ -10,6 +11,7 @@ public class Main extends javax.swing.JFrame {
     List<Product> products = new ArrayList<>();
     TableRowSorter<ModelProductsTable> tableRowSorter = new TableRowSorter<>();
     AddProductForm addProductForm;
+
     public Main() {
         initComponents();
         initObjects();
@@ -110,17 +112,21 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        ModelProductsTable productModel = (ModelProductsTable) this.tblInventory.getModel();
-        productModel.removeProduct();
+        ModelProductsTable productModel = (ModelProductsTable) tblInventory.getModel();
+        switch (tblInventory.getSelectedRowCount()) {
+            case 1 -> productModel.removeProduct(tblInventory.getSelectedRow());
+            case 0 -> JOptionPane.showMessageDialog(null, "Select one product");
+            default -> JOptionPane.showMessageDialog(null, "Select only one product");
+        }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         if (this.addProductForm != null && !this.addProductForm.isVisible()) {
-            if (!products.isEmpty()){
-            addProductForm.setLastProductId(products.get(products.size() - 1).getId());
-            }else{
-            addProductForm.setLastProductId(0);
+            if (!products.isEmpty()) {
+                addProductForm.setLastProductId(products.get(products.size() - 1).getId());
+            } else {
+                addProductForm.setLastProductId(0);
             }
             this.addProductForm.setVisible(true);
         }
@@ -161,16 +167,15 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void initObjects() {
-                
+
         ModelProductsTable model = new ModelProductsTable(this.products);
         tableRowSorter = new TableRowSorter<>(model);
-        
+
         //List<RowSorter.SortKey> sortKey = new ArrayList<>();
         //sortKey.add(new RowSorter.SortKey(0,SortOrder.DESCENDING));
         //tableRowSorter.setSortKeys(sortKey);
-        
         tblInventory.setRowSorter(tableRowSorter);
         tblInventory.setModel(model);
     }

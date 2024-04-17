@@ -9,11 +9,19 @@ public class AddProductForm extends javax.swing.JFrame {
     private Main mainFrame;
     private List<Product> products;
     private int lastProductId;
+    private Product actualProduct;
        
     public void setLastProductId(int productId) {
      lblIdValue.setText(productId+1+"");
      this.lastProductId = productId;
 }
+    public void setActualProduct(Product actualProduct) {
+        lblIdValue.setText(actualProduct.getId()+"");
+        txtName.setText(actualProduct.getName());
+        txtPrice.setText(actualProduct.getPrice()+"");
+        txtStock.setText(actualProduct.getStock()+"");
+        this.actualProduct = actualProduct;
+   }   
 
     public AddProductForm(List<Product> products, Main main) {
         initComponents();
@@ -60,8 +68,21 @@ public class AddProductForm extends javax.swing.JFrame {
         return isValidData;
     }
     
+    private void updateProduct(){
+        actualProduct.setName(txtName.getText());
+        actualProduct.setPrice(Float.parseFloat(txtPrice.getText()));
+        actualProduct.setStock(Integer.parseInt(txtStock.getText()));
+    }
     
-
+    private void createProduct(){
+        Product product = new Product();
+        product.setId(lastProductId+1);
+        product.setName(txtName.getText());
+        product.setPrice(Float.parseFloat(txtPrice.getText()));
+        product.setStock(Integer.parseInt(txtStock.getText()));
+        products.add(product);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -227,12 +248,11 @@ public class AddProductForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "You have some errors in form");
             return;
         }
-        Product product = new Product();
-        product.setId(lastProductId+1);
-        product.setName(txtName.getText());
-        product.setPrice(Float.parseFloat(txtPrice.getText()));
-        product.setStock(Integer.parseInt(txtStock.getText()));
-        products.add(product);
+        if (actualProduct != null){
+            updateProduct();
+        }else{
+            createProduct();
+        }
         initObjects();
         mainFrame.initObjects();
         this.setVisible(false);

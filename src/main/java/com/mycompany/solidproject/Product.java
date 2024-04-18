@@ -7,7 +7,7 @@ package com.mycompany.solidproject;
 public class Product {
 
     private int id;
-    private String name;
+    String name;
     private float price;
     private int stock;
     

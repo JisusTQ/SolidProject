@@ -33,7 +33,7 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblInventory.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        tblInventory.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         tblInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -51,6 +51,7 @@ public class Main extends javax.swing.JFrame {
 
         btnSearch.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnSearch.setText("Search");
+        btnSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -59,6 +60,7 @@ public class Main extends javax.swing.JFrame {
 
         btnDelete.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnDelete.setText("Remove");
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -67,6 +69,7 @@ public class Main extends javax.swing.JFrame {
 
         btnAdd.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnAdd.setText("Add");
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -75,6 +78,7 @@ public class Main extends javax.swing.JFrame {
 
         btnEdit.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         btnEdit.setText("Edit");
+        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -82,6 +86,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         btnExit.setText("❌");
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -132,7 +137,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        RowFilter<ModelProductsTable, Integer> rowFilter = RowFilter.regexFilter(txtSearch.getText(), 1);
+        RowFilter<ModelProductsTable, Integer> rowFilter = RowFilter.regexFilter(txtSearch.getText(), 1,0);
         tableRowSorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_btnSearchActionPerformed
 

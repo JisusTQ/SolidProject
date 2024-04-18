@@ -106,15 +106,21 @@ public class AddProductForm extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(611, 420));
 
-        lblTitle.setText("ADD PRODUCT FORM");
+        lblTitle.setFont(new java.awt.Font("Trebuchet MS", 1, 20)); // NOI18N
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("PRODUCT FORM");
 
+        lblId.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
         lblId.setText("Product Id ");
 
-        lblIdValue.setText("jLabel1");
+        lblIdValue.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
 
+        lblName.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
         lblName.setText("Name");
 
+        txtName.setFont(new java.awt.Font("MS UI Gothic", 0, 15)); // NOI18N
         txtName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtName.setMaximumSize(new java.awt.Dimension(168, 16));
         txtName.setMinimumSize(new java.awt.Dimension(168, 16));
@@ -124,8 +130,10 @@ public class AddProductForm extends javax.swing.JFrame {
             }
         });
 
+        lblPrice.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
         lblPrice.setText("Price");
 
+        txtPrice.setFont(new java.awt.Font("MS UI Gothic", 0, 15)); // NOI18N
         txtPrice.setMaximumSize(new java.awt.Dimension(168, 16));
         txtPrice.setMinimumSize(new java.awt.Dimension(168, 16));
         txtPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -134,11 +142,14 @@ public class AddProductForm extends javax.swing.JFrame {
             }
         });
 
+        lblStock.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
         lblStock.setText("Stock");
 
+        txtStock.setFont(new java.awt.Font("MS UI Gothic", 0, 15)); // NOI18N
         txtStock.setMaximumSize(new java.awt.Dimension(168, 16));
         txtStock.setMinimumSize(new java.awt.Dimension(168, 16));
 
+        btnConfirmProduct.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
         btnConfirmProduct.setText("Save Product");
         btnConfirmProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,14 +164,17 @@ public class AddProductForm extends javax.swing.JFrame {
             }
         });
 
+        lblNameError.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
         lblNameError.setForeground(new java.awt.Color(204, 0, 0));
         lblNameError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNameError.setText("Product name must be required");
 
+        lblPriceError.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
         lblPriceError.setForeground(new java.awt.Color(204, 0, 0));
         lblPriceError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPriceError.setText("Price must be a valid value");
 
+        lblStockError.setFont(new java.awt.Font("MS UI Gothic", 1, 15)); // NOI18N
         lblStockError.setForeground(new java.awt.Color(204, 0, 0));
         lblStockError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblStockError.setText("Stock must be a valid value");
@@ -172,12 +186,12 @@ public class AddProductForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(btnBack)
-                        .addGap(157, 157, 157)
-                        .addComponent(lblTitle))
+                        .addGap(233, 233, 233)
+                        .addComponent(btnConfirmProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
+                        .addContainerGap()
+                        .addComponent(btnBack)
+                        .addGap(92, 92, 92)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblId)
@@ -194,21 +208,19 @@ public class AddProductForm extends javax.swing.JFrame {
                                     .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblNameError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblPriceError, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                    .addComponent(lblStockError, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(btnConfirmProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(179, Short.MAX_VALUE))
+                                    .addComponent(lblPriceError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblStockError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnBack)
-                    .addComponent(lblTitle))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblId)
                     .addComponent(lblIdValue))
@@ -232,7 +244,7 @@ public class AddProductForm extends javax.swing.JFrame {
                 .addComponent(lblStockError)
                 .addGap(38, 38, 38)
                 .addComponent(btnConfirmProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();

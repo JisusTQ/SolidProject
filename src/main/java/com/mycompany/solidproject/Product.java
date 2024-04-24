@@ -10,7 +10,7 @@ public class Product {
     String name;
     private float price;
     private int stock;
-    
+
     public int getId() {
         return id;
     }
@@ -42,5 +42,5 @@ public class Product {
     public void setStock(int stock) {
         this.stock = stock;
     }
-    
+
 }

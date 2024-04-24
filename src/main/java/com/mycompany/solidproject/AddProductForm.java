@@ -1,4 +1,3 @@
-
 package com.mycompany.solidproject;
 
 import java.util.List;
@@ -10,18 +9,19 @@ public class AddProductForm extends javax.swing.JFrame {
     private List<Product> products;
     private int lastProductId;
     private Product actualProduct;
-       
+
     public void setLastProductId(int productId) {
-     lblIdValue.setText(productId+1+"");
-     this.lastProductId = productId;
-}
+        lblIdValue.setText(productId + 1 + "");
+        this.lastProductId = productId;
+    }
+
     public void setActualProduct(Product actualProduct) {
-        lblIdValue.setText(actualProduct.getId()+"");
+        lblIdValue.setText(actualProduct.getId() + "");
         txtName.setText(actualProduct.getName());
-        txtPrice.setText(actualProduct.getPrice()+"");
-        txtStock.setText(actualProduct.getStock()+"");
+        txtPrice.setText(actualProduct.getPrice() + "");
+        txtStock.setText(actualProduct.getStock() + "");
         this.actualProduct = actualProduct;
-   }   
+    }
 
     public AddProductForm(List<Product> products, Main main) {
         initComponents();
@@ -29,66 +29,75 @@ public class AddProductForm extends javax.swing.JFrame {
         this.products = products;
         this.mainFrame = main;
     }
+
     public AddProductForm() {
         initComponents();
         initObjects();
     }
-    
-    private boolean isValidData(){
+
+    private boolean isValidData() {
         boolean isValidData = true;
-        for (Product product : products) {
-            if (product.getName().equals(txtName.getText())){
-                JOptionPane.showMessageDialog(null, "The product name already exist, please type another name.");
-                isValidData = false;
-        } 
+        if (!mainFrame.isEditing) {
+            for (Product product : products) {
+                if (product.getName().equals(txtName.getText())) {
+                    JOptionPane.showMessageDialog(null, "The product name already exist, please type another name.");
+                    isValidData = false;
+                }
+            }
+        } else {
+            for (Product product : products) {
+                if (product.getName().equals(actualProduct.getName())) {
+                    isValidData = true;
+                } else if (product.getName().equals(txtName.getText())) {
+                    JOptionPane.showMessageDialog(null, "The product name already exist, please type another name.");
+                    isValidData = false;
+                }
+            }
         }
-        if (txtName.getText().isBlank()){
+        if (txtName.getText().isBlank()) {
             lblNameError.setVisible(true);
             isValidData = false;
-        }
-        else{
+        } else {
             lblNameError.setVisible(false);
         }
         try {
-            if(txtPrice.getText().isBlank() || Float.parseFloat(txtPrice.getText())<0){
-              throw new Exception();
+            if (txtPrice.getText().isBlank() || Float.parseFloat(txtPrice.getText()) < 0) {
+                throw new Exception();
+            } else {
+                lblPriceError.setVisible(false);
             }
-            else{
-            lblPriceError.setVisible(false);
-        }
         } catch (Exception e) {
             lblPriceError.setVisible(true);
             isValidData = false;
         }
         try {
-            if(txtStock.getText().isBlank() || Integer.parseInt(txtStock.getText())<0){
-              throw new Exception();
+            if (txtStock.getText().isBlank() || Integer.parseInt(txtStock.getText()) < 0) {
+                throw new Exception();
+            } else {
+                lblStockError.setVisible(false);
             }
-            else{
-            lblStockError.setVisible(false);
-        }
         } catch (Exception e) {
             lblStockError.setVisible(true);
             isValidData = false;
         }
         return isValidData;
     }
-    
-    private void updateProduct(){
+
+    private void updateProduct() {
         actualProduct.setName(txtName.getText());
         actualProduct.setPrice(Float.parseFloat(txtPrice.getText()));
         actualProduct.setStock(Integer.parseInt(txtStock.getText()));
     }
-    
-    private void createProduct(){
+
+    private void createProduct() {
         Product product = new Product();
-        product.setId(lastProductId+1);
+        product.setId(lastProductId + 1);
         product.setName(txtName.getText());
         product.setPrice(Float.parseFloat(txtPrice.getText()));
         product.setStock(Integer.parseInt(txtStock.getText()));
         products.add(product);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -264,13 +273,13 @@ public class AddProductForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnConfirmProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmProductActionPerformed
-        if(!isValidData()){
+        if (!isValidData()) {
             JOptionPane.showMessageDialog(null, "You have some errors in form");
             return;
         }
-        if (actualProduct != null){
+        if (actualProduct != null) {
             updateProduct();
-        }else{
+        } else {
             createProduct();
         }
         initObjects();
@@ -318,8 +327,8 @@ public class AddProductForm extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void initObjects(){
+
+    private void initObjects() {
         txtName.setText("");
         txtPrice.setText("");
         txtStock.setText("");

@@ -11,6 +11,7 @@ public class Main extends javax.swing.JFrame {
     List<Product> products = new ArrayList<>();
     TableRowSorter<ModelProductsTable> tableRowSorter = new TableRowSorter<>();
     AddProductForm addProductForm;
+    boolean isEditing = false;
 
     public Main() {
         initComponents();
@@ -137,7 +138,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        RowFilter<ModelProductsTable, Integer> rowFilter = RowFilter.regexFilter(txtSearch.getText(), 1,0);
+        RowFilter<ModelProductsTable, Integer> rowFilter = RowFilter.regexFilter(txtSearch.getText(), 1, 0);
         tableRowSorter.setRowFilter(rowFilter);
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -148,13 +149,16 @@ public class Main extends javax.swing.JFrame {
                 productModel.removeProduct(tblInventory.getSelectedRow());
                 JOptionPane.showMessageDialog(null, "Product eliminated succesfully!");
             }
-            case 0 -> JOptionPane.showMessageDialog(null, "Select one product");
-            default -> JOptionPane.showMessageDialog(null, "Select only one product");
+            case 0 ->
+                JOptionPane.showMessageDialog(null, "Select one product");
+            default ->
+                JOptionPane.showMessageDialog(null, "Select only one product");
         }
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        isEditing = false;
         if (this.addProductForm != null && !this.addProductForm.isVisible()) {
             if (!products.isEmpty()) {
                 addProductForm.setLastProductId(products.get(products.size() - 1).getId());
@@ -166,6 +170,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        isEditing = true;
         if (this.addProductForm != null && !this.addProductForm.isVisible()) {
             addProductForm.setActualProduct(products.get(tblInventory.getSelectedRow()));
             this.addProductForm.setVisible(true);

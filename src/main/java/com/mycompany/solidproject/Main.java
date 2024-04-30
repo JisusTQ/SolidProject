@@ -14,6 +14,8 @@ public class Main extends javax.swing.JFrame {
     boolean isEditing = false;
 
     public Main() {
+        Connection conection= new Connection();
+        conection.createConnection();
         initComponents();
         initObjects();
         this.addProductForm = new AddProductForm(products, this);

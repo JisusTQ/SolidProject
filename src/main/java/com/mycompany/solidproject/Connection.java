@@ -56,8 +56,8 @@ public class Connection {
         collection.insertOne(document);
     }
 
-    public void deleteProduct(Product product) {
-        collection.deleteOne(new BasicDBObject().append("id", product.getId()));
+    public void deleteProduct(int id) {
+        collection.deleteOne(new BasicDBObject().append("id", id));
     }
 
     public void updateProduct(Product product) {

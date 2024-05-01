@@ -24,6 +24,10 @@ public class AddProductForm extends javax.swing.JFrame {
         this.actualProduct = actualProduct;
     }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     public AddProductForm(List<Product> products, Main main, Connection database) {
         initComponents();
         initObjects();

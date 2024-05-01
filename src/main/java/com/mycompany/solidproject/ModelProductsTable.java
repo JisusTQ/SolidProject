@@ -16,17 +16,16 @@ public class ModelProductsTable extends AbstractTableModel {
     List<Product> products;
     String[] columnNames = {"Product Id", "Product name", "Price", "Stock"};
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     public ModelProductsTable(List<Product> products) {
         this.products = products;
     }
 
     public void AddProduct(Product product) {
         this.products.add(product);
-        this.fireTableDataChanged();
-    }
-
-    public void removeProduct(int row) {
-        this.products.remove(row);
         this.fireTableDataChanged();
     }
 

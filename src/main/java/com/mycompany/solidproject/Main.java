@@ -18,7 +18,7 @@ public class Main extends javax.swing.JFrame {
         connection.createConnection();
         initComponents();
         initObjects();
-        this.addProductForm = new AddProductForm(products, this, connection);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -148,7 +148,10 @@ public class Main extends javax.swing.JFrame {
         ModelProductsTable productModel = (ModelProductsTable) tblInventory.getModel();
         switch (tblInventory.getSelectedRowCount()) {
             case 1 -> {
-                productModel.removeProduct(tblInventory.getSelectedRow());
+                connection.deleteProduct((int) tblInventory.getModel().getValueAt(tblInventory.getSelectedRow(), 0));
+                products = connection.findProducts();
+                productModel.setProducts(products);
+                productModel.fireTableDataChanged();
                 JOptionPane.showMessageDialog(null, "Product eliminated succesfully!");
             }
             case 0 ->
@@ -233,6 +236,8 @@ public class Main extends javax.swing.JFrame {
         tblInventory.getColumnModel().getColumn(3).setMaxWidth(90);
         tblInventory.getTableHeader().setReorderingAllowed(false);
         tblInventory.getTableHeader().setResizingAllowed(false);
+        this.addProductForm = new AddProductForm(products, this, connection);
+        addProductForm.setProducts(products);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

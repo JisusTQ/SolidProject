@@ -52,9 +52,7 @@ public class AddProductForm extends javax.swing.JFrame {
             }
         } else {
             for (Product product : products) {
-                if (product.getName().equals(actualProduct.getName())) {
-                    isValidData = true;
-                } else if (product.getName().equals(txtName.getText())) {
+                if (product.getName().equals(txtName.getText()) && !product.getName().equals(actualProduct.getName())) {
                     JOptionPane.showMessageDialog(null, "The product name already exist, please type another name.");
                     isValidData = false;
                 }
@@ -93,6 +91,7 @@ public class AddProductForm extends javax.swing.JFrame {
         actualProduct.setName(txtName.getText());
         actualProduct.setPrice(Float.parseFloat(txtPrice.getText()));
         actualProduct.setStock(Integer.parseInt(txtStock.getText()));
+        database.updateProduct(actualProduct);
     }
 
     private void createProduct() {

@@ -12,13 +12,13 @@ public class Main extends javax.swing.JFrame {
     TableRowSorter<ModelProductsTable> tableRowSorter = new TableRowSorter<>();
     AddProductForm addProductForm;
     boolean isEditing = false;
+    Connection connection = new Connection();
 
     public Main() {
-        Connection conection= new Connection();
-        conection.createConnection();
+        connection.createConnection();
         initComponents();
         initObjects();
-        this.addProductForm = new AddProductForm(products, this);
+        this.addProductForm = new AddProductForm(products, this, connection);
     }
 
     @SuppressWarnings("unchecked")
@@ -220,7 +220,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     public void initObjects() {
-
+        products = connection.findProducts();
         ModelProductsTable model = new ModelProductsTable(this.products);
         tableRowSorter = new TableRowSorter<>(model);
         tblInventory.setRowSorter(tableRowSorter);

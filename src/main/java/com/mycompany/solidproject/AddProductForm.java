@@ -9,6 +9,7 @@ public class AddProductForm extends javax.swing.JFrame {
     private List<Product> products;
     private int lastProductId;
     private Product actualProduct;
+    private Connection database;
 
     public void setLastProductId(int productId) {
         lblIdValue.setText(productId + 1 + "");
@@ -23,11 +24,12 @@ public class AddProductForm extends javax.swing.JFrame {
         this.actualProduct = actualProduct;
     }
 
-    public AddProductForm(List<Product> products, Main main) {
+    public AddProductForm(List<Product> products, Main main, Connection database) {
         initComponents();
         initObjects();
         this.products = products;
         this.mainFrame = main;
+        this.database = database;
     }
 
     public AddProductForm() {
@@ -95,7 +97,7 @@ public class AddProductForm extends javax.swing.JFrame {
         product.setName(txtName.getText());
         product.setPrice(Float.parseFloat(txtPrice.getText()));
         product.setStock(Integer.parseInt(txtStock.getText()));
-        products.add(product);
+        database.insertProduct(product);
     }
 
     @SuppressWarnings("unchecked")

@@ -52,7 +52,7 @@ public class Connection {
         document.put("id", product.getId());
         document.put("name", product.getName());
         document.put("stock", product.getStock());
-        document.put("Price", product.getPrice());
+        document.put("price", product.getPrice());
         collection.insertOne(document);
     }
 
@@ -68,15 +68,16 @@ public class Connection {
         collection.updateOne(new BasicDBObject().append("id", product.getId()),
                 new BasicDBObject().append("$set", dataUpdated));
     }
-    
-    public List<Product> findProducts(){
+
+    public List<Product> findProducts() {
         List<Product> products = new ArrayList<>();
         for (Document document : collection.find()) {
             Product product = new Product();
             product.setId(document.getInteger("id"));
             product.setName(document.getString("name"));
             product.setStock(document.getInteger("stock"));
-            product.setPrice((float)document.get("price", 0));
+            product.setPrice(document.getDouble("price").floatValue());
+
             products.add(product);
         }
         return products;
